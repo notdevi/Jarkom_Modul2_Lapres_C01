@@ -10,17 +10,17 @@ Praktikum Modul 2 Jaringan Komputer 2020
 ## PEMBAHASAN SOAL
 Yang pertama dilakukan sebelum memulai konfigurasi adalah membuat topologi jaringan terlebih dahulu. Pertama kita jalankan Xming server, setelah Xming berjalan kemudian kita jalankan PuTTY dan masukkan IP kelas Jarkom C = 10.151.36.203
 
-![](img/pre1.png)
+![](img/pre1.PNG)
 
 Kemudian pada category Connection >> SSH >> X11, centang kolom "Enable X11 forwarding".
 
-![](img/pre2.png)
+![](img/pre2.PNG)
 
 Kemudian kia jalankan dengan meng-click Open. Setelah dijalankan, akan terbuka window baru. Kemudian login sebagai kelompok masing-masing menggunakan id kelompok dan password.
 
 Setelah itu atur topologi jaringan dengan syntax berikut. Karena tertera pada soal bahwa default memory adalah 96M kecuali untuk server, maka memory setiap Kota perlu diatur, sebagai berikut :
 
-![](img/pre3.png)
+![](img/pre3.PNG)
 
 Kemudian kita jalankan file topologi yang telah dibuat dan diatur dengan menggunakan `bash topologi.sh`. 
 
@@ -69,7 +69,7 @@ Restart bind9 dengan command `service bind9 restart`.
 
 **HASIL :**
 
-![](img/hasil1.png)
+![](img/hasil1.PNG)
 
 ### Soal No. 2
 (2) menambah alias http://www.semeruyyy.pw
@@ -82,7 +82,7 @@ Restart bind9 dengan command `service bind9 restart`.
 
 **HASIL :**
 
-![](img/hasil2.png)
+![](img/hasil2.PNG)
 
 ### Soal No. 3
 (3) buat subdomain http://penanjakan.semeruyyy.pw yang diatur DNS-nya pada MALANG dan mengarah ke IP Server PROBOLINGGO
@@ -99,7 +99,7 @@ Restart bind9 dengan command `service bind9 restart`.
 
 **HASIL :**
 
-![](img/hasil3.png)
+![](img/hasil3.PNG)
 
 ### Soal No. 4
 (4) buatkan reverse domain untuk domain utama.
@@ -174,7 +174,7 @@ Restart bind9 MOJOKERTO dengan command `service bind9 restart`.
 
 **HASIL :**
 
-![](img/hasil6.png)
+![](img/hasil6.PNG)
 
 ### Soal No.7
 (7) buat subdomain dengan nama http://naik.gunung.semeruyyy.pw, domain ini diarahkan ke IP Server PROBOLINGGO.
@@ -187,7 +187,7 @@ Restart bind9 MOJOKERTO dengan command `service bind9 restart`.
 
 **HASIL :**
 
-![](img/hasil7.png)
+![](img/hasil7.PNG)
 
 Setelah selesai membuat keseluruhan domain, kamu diminta untuk segera mengatur web server. 
 
@@ -203,7 +203,7 @@ Kemudian pindah ke folder `/etc/apache2/sites-available/` dan copy file `000-def
 ServerName semeruc01.pw
 ServerAlias www.semeruc01.pw
 ```
-![](img/8d.png)
+![](img/8d.PNG)
 
 Kemudian aktifkan konfigurasi yang telah dibuat dengan command `a2ensite semeruc02.pw`.
 
@@ -211,7 +211,7 @@ Restart apache dengan command `service apache2 restart`.
 
 **HASIL :**
 
-![](img/hasil8.png)
+![](img/hasil8.PNG)
 
 ### Soal No.9
 (9) aktifkan mod rewrite agar urlnya menjadi http://semeruyyy.pw/home.
@@ -231,7 +231,7 @@ Restart apache dengan command `service apache2 restart`.
 
 **HASIL :**
 
-![](img/hasil9.png)
+![](img/hasil9.PNG)
 
 ### Soal No.10
 (10) Web http://penanjakan.semeruyyy.pw akan digunakan untuk menyimpan assets file yang memiliki DocumentRoot pada /var/www/penanjakan.semeruyyy.pw dan memiliki struktur
@@ -257,7 +257,7 @@ ServerAlias www.penanjakan.semeruc01.pw
 ```
 Kemudian ubah folder document root menjadi `/var/www/penanjakan.semeruc01.pw`.
 
-![](img/10d.png)
+![](img/10d.PNG)
 
 Kemudian aktifkan konfigurasi yang telah dibuat dengan command `a2ensite penanjakan.semeruc02.pw`.
 
@@ -265,7 +265,7 @@ Restart apache dengan command `service apache2 restart`.
 
 **HASIL :**
 
-![](img/hasil10.png)
+![](img/hasil10.PNG)
 
 ### Soal No.11
 (11) Pada folder `/public` dibolehkan directory listing namun untuk folder yang berada di dalamnya tidak dibolehkan.
@@ -279,17 +279,17 @@ Pada UML PROBOLINGGO, buka file `/etc/apache2/sites-available/penanjakan.semeruc
      Options -Indexes
  </DirectoryMatch>
 ```
-![](img/11d.png)
+![](img/11d.PNG)
 
 Restart apache dengan command `service apache2 restart`.
 
 **HASIL :**
 
-![](img/hasil11a.png)
+![](img/hasil11a.PNG)
 
-![](img/hasil11b.png)
+![](img/hasil11b.PNG)
 
-![](img/hasil11c.png)
+![](img/hasil11c.PNG)
 
 ### Soal No.12
 (12) Untuk mengatasi HTTP Error code 404, disediakan file `404.html` pada folder `/errors` untuk mengganti error default 404 dari Apache.
@@ -319,7 +319,7 @@ Restart apache dengan command `service apache2 restart`.
 
 **HASIL :**
 
-![](img/hasil13.png)
+![](img/hasil13.PNG)
 
 ### Soal No.14
 (14) Untuk web http:// gunung.semeruyyy.pw belum dapat dikonfigurasi pada web server karena menunggu pengerjaan website selesai. sedangkan web http:// naik.gunung.semeruyyy.pw sudah bisa diakses hanya dengan menggunakan port 8888.

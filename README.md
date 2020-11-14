@@ -26,27 +26,7 @@ Kemudian kita jalankan file topologi yang telah dibuat dan diatur dengan menggun
 
 Setelah semua window UML muncul, login ke setiap UML dengan id "root" dan password "praktikum". Kemudian pada UML Router, yaitu SURABAYA, dilakukan setting `sysctl` dengan menggunakan command `nano /etc/sysctl.conf`. Kemudian uncomment baris `net.ipv4.ip_forward=1`. Untuk mengaktifkan perubahan, digunakan command `sysctl -p`.
 
-Kemudian kita lakukan setting IP untuk setiap UML dengan menggunakan command `nano /etc/network/interfaces`. Kemudian dimasukkan konfigurasi IP sebagai berikut :
-```
-SURABAYA (ROUTER)
-```
-```
-MALANG (DNS SERVER MASTER)
-```
-```
-MOJOKERTO (DNS SERVER SLAVE)
-```
-```
-PROBOLINGGO (WEB SERVER)
-```
-```
-GRESIK (CLIENT)
-```
-```
-SIDOARJO (CLIENT)
-```
-
-Kemudian restart network dengan menggunakan command `service networking restart` pada setiap UML. Kemudian jalankan iptables pada Router yaitu SURABAYA dengan menggunakan command `iptables –t nat –A POSTROUTING –o eth0 –j MASQUERADE –s 192.168.0.0/16`. Untuk memastikan konfigurasi telah dibuat dnegan benar, kita coba dengan `ping google.com`. Kemudian kita buat file export.sh yang berisi id dan password proxy yang sudah didapat pada setiap UML. File proxy dapat dijalankan dengan menggunakan command `source export.sh`. Kemudian lakukan update pada semua UML dengan mengetikkan `apt-get update`.
+Kemudian kita lakukan setting IP untuk setiap UML dengan menggunakan command `nano /etc/network/interfaces`. Kemudian restart network dengan menggunakan command `service networking restart` pada setiap UML. Kemudian jalankan iptables pada Router yaitu SURABAYA dengan menggunakan command `iptables –t nat –A POSTROUTING –o eth0 –j MASQUERADE –s 192.168.0.0/16`. Untuk memastikan konfigurasi telah dibuat dnegan benar, kita coba dengan `ping google.com`. Kemudian kita buat file export.sh yang berisi id dan password proxy yang sudah didapat pada setiap UML. File proxy dapat dijalankan dengan menggunakan command `source export.sh`. Kemudian lakukan update pada semua UML dengan mengetikkan `apt-get update`.
 
 ### Soal No. 1
 (1) membuat website utama dengan alamat http://semeruyyy.pw

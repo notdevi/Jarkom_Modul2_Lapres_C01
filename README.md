@@ -281,6 +281,8 @@ Pada UML PROBOLINGGO, buka file `/etc/apache2/sites-available/penanjakan.semeruc
 ```
 ![](img/11d.PNG)
 
+![](img/no11.png)
+
 Restart apache dengan command `service apache2 restart`.
 
 **HASIL :**
@@ -338,11 +340,11 @@ ServerAlias www.naik.gunung.semeruc01.pw
 ```
 Kemudian ubah folder document root menjadi `/var/www/naik.gunung.semeruc01.pw` dan virtual host menjadi 8888.
 
-![](img/14d.png)
+![](img/14d.PNG)
 
 Kemudian pada file `/etc/apache2/ports.conf`, tambahkan `Listen 8888`.
 
-![](img/14e.png)
+![](img/14e.PNG)
 
 Kemudian aktifkan konfigurasi yang telah dibuat dengan command `a2ensite naik.gunung.semeruc02.pw`.
 

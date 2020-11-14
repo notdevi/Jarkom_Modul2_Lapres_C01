@@ -7,38 +7,24 @@ Praktikum Modul 2 Jaringan Komputer 2020
 
 **2. Kevin Christian Hadinata (05111840000066)**
 
-## PENJELASAN SOAL
-Semeru adalah salah satu gunung yang terkenal di Jawa Timur. Bibah adalah salah satu juru kunci Semeru. Bibah ingin menyebarkan keindahan Semeru pada dunia sehingga dia membeli 3 buah server yang berada di MALANG, MOJOKERTO dan PROBOLINGGO. Server MALANG akan digunakan sebagai DNS Server Master, MOJOKERTO akan digunakan sebagai DNS Server Slave dan PROBOLINGGO akan digunakan sebagai Web Server. Selain 3 server terdapat 2 klien yang digunakan untuk testing oleh Bibah yaitu GRESIK dan SIDOARJO. Untuk menyambungkan semua jaringan tersebut Bibah memberi router di SURABAYA.
-
-Kalian diminta untuk membuat sebuah website utama dengan :
-
-(1) alamat http://semeruyyy.pw yang memiliki (2) alias http://www.semeruyyy.pw, dan (3) subdomain http://penanjakan.semeruyyy.pw yang diatur DNS-nya pada MALANG dan mengarah ke IP Server PROBOLINGGO serta dibuatkan (4) reverse domain untuk domain utama. Untuk mengantisipasi server dicuri/rusak, Bibah minta dibuatkan (5) DNS Server Slave pada MOJOKERTO agar Bibah tidak terganggu menikmati keindahan Semeru pada Website. Selain website utama Bibah juga meminta dibuatkan (6) subdomain dengan alamat http://gunung.semeruyyy.pw yang didelegasikan pada server MOJOKERTO dan mengarah ke IP Server PROBOLINGGO. Bibah juga ingin memberi petunjuk mendaki gunung semeru kepada anggota komunitas sehingga dia meminta dibuatkan (7) subdomain dengan nama http://naik.gunung.semeruyyy.pw, domain ini diarahkan ke IP Server PROBOLINGGO. Setelah selesai membuat keseluruhan domain, kamu diminta untuk segera mengatur web server. (8) Domain http://semeruyyy.pw memiliki DocumentRoot pada /var/www/semeruyyy.pw. Awalnya web dapat diakses menggunakan alamat http://semeruyyy.pw/index.php/home. Karena dirasa alamat urlnya kurang bagus, maka (9) diaktifkan mod rewrite agar urlnya menjadi http://semeruyyy.pw/home. (10) Web http://penanjakan.semeruyyy.pw akan digunakan untuk menyimpan assets file yang memiliki DocumentRoot pada /var/www/penanjakan.semeruyyy.pw dan memiliki struktur folder sebagai berikut: 
-
-/var/www/ penanjakan.semeruyyy.pw
-/var/www/ penanjakan.semeruyyy.pw/public/javascripts
-/var/www/ penanjakan.semeruyyy.pw/public/css
-/var/www/ penanjakan.semeruyyy.pw/public/images
-/var/www/ penanjakan.semeruyyy.pw/errors
-
-(11) Pada folder /public dibolehkan directory listing namun untuk folder yang berada di dalamnya tidak dibolehkan. (12) Untuk mengatasi HTTP Error code 404, disediakan file 404.html pada folder /errors untuk mengganti error default 404 dari Apache. (13) Untuk mengakses file assets javascript awalnya harus menggunakan url http://penanjakan.semeruyyy.pw/public/javascripts. Karena terlalu panjang maka dibuatkan konfigurasi virtual host agar ketika mengakses file assets menjadi http://penanjakan.semeruyyy.pw/js. Untuk web http:// gunung.semeruyyy.pw belum dapat dikonfigurasi pada web server karena menunggu pengerjaan website selesai. (14) sedangkan web http:// naik.gunung.semeruyyy.pw sudah bisa diakses hanya dengan menggunakan port 8888. DocumentRoot web berada pada /var/www/ naik.gunung.semeruyyy.pw.Dikarenakan web http:// naik.gunung.semeruyyy.pw bersifat private (15) Bibah meminta kamu membuat web http:// naik.gunung.semeruyyy.pw agar diberi autentikasi password dengan username “semeru” dan password “kuynaikgunung” supaya aman dan tidak sembarang orang bisa mengaksesnya. Saat Bibah mengunjungi IP PROBOLINGGO, yang muncul bukan web utama http:// semeruyyy.pw melainkan laman default Apache yang bertuliskan “It works!”. (16) Karena dirasa kurang profesional, maka setiap Bibah mengunjungi IP PROBOLINGGO akan dialihkan secara otomatis ke http:// semeruyyy.pw. (17) Karena pengunjung pada /var/www/ penanjakan.semeruyyy.pw/public/images sangat banyak maka semua request gambar yang memiliki substring “semeru” akan diarahkan menuju semeru.jpg.
-
 ## PEMBAHASAN SOAL
 Yang pertama dilakukan sebelum memulai konfigurasi adalah membuat topologi jaringan terlebih dahulu. Pertama kita jalankan Xming server, setelah Xming berjalan kemudian kita jalankan PuTTY dan masukkan IP kelas Jarkom C = 10.151.36.203
 
+![](img/pre1.png)
+
 Kemudian pada category Connection >> SSH >> X11, centang kolom "Enable X11 forwarding".
+
+![](img/pre2.png)
 
 Kemudian kia jalankan dengan meng-click Open. Setelah dijalankan, akan terbuka window baru. Kemudian login sebagai kelompok masing-masing menggunakan id kelompok dan password.
 
 Setelah itu atur topologi jaringan dengan syntax berikut. Karena tertera pada soal bahwa default memory adalah 96M kecuali untuk server, maka memory setiap Kota perlu diatur, sebagai berikut :
-```
 
-```
+![](img/pre3.png)
 
 Kemudian kita jalankan file topologi yang telah dibuat dan diatur dengan menggunakan `bash topologi.sh`. 
 
-Setelah semua window UML muncul, login ke setiap UML dengan id "root" dan password "praktikum". Kemudian pada UML Router, yaitu SURABAYA, dilakukan setting `sysctl` dengan menggunakan command `nano /etc/sysctl.conf`. Kemudian uncomment baris `net.ipv4.ip_forward=1`.
-
-Untuk mengaktifkan perubahan, digunakan command `sysctl -p`.
+Setelah semua window UML muncul, login ke setiap UML dengan id "root" dan password "praktikum". Kemudian pada UML Router, yaitu SURABAYA, dilakukan setting `sysctl` dengan menggunakan command `nano /etc/sysctl.conf`. Kemudian uncomment baris `net.ipv4.ip_forward=1`. Untuk mengaktifkan perubahan, digunakan command `sysctl -p`.
 
 Kemudian kita lakukan setting IP untuk setiap UML dengan menggunakan command `nano /etc/network/interfaces`. Kemudian dimasukkan konfigurasi IP sebagai berikut :
 ```
@@ -60,15 +46,7 @@ GRESIK (CLIENT)
 SIDOARJO (CLIENT)
 ```
 
-Kemudian restart network dengan menggunakan command `service networking restart` pada setiap UML.
-
-Kemudian jalankan iptables pada Router yaitu SURABAYA dengan menggunakan command `iptables –t nat –A POSTROUTING –o eth0 –j MASQUERADE –s 192.168.0.0/16`.
-
-Untuk memastikan konfigurasi telah dibuat dnegan benar, kita coba dengan `ping google.com`.
-
-Kemudian kita buat file export.sh yang berisi id dan password proxy yang sudah didapat pada setiap UML. File proxy dapat dijalankan dengan menggunakan command `source export.sh`.
-
-Kemudian lakukan update pada semua UML dengan mengetikkan `apt-get update`.
+Kemudian restart network dengan menggunakan command `service networking restart` pada setiap UML. Kemudian jalankan iptables pada Router yaitu SURABAYA dengan menggunakan command `iptables –t nat –A POSTROUTING –o eth0 –j MASQUERADE –s 192.168.0.0/16`. Untuk memastikan konfigurasi telah dibuat dnegan benar, kita coba dengan `ping google.com`. Kemudian kita buat file export.sh yang berisi id dan password proxy yang sudah didapat pada setiap UML. File proxy dapat dijalankan dengan menggunakan command `source export.sh`. Kemudian lakukan update pada semua UML dengan mengetikkan `apt-get update`.
 
 ### Soal No. 1
 (1) membuat website utama dengan alamat http://semeruyyy.pw
@@ -91,7 +69,7 @@ Restart bind9 dengan command `service bind9 restart`.
 
 **HASIL :**
 
-***foto***
+![](img/hasil1.png)
 
 ### Soal No. 2
 (2) menambah alias http://www.semeruyyy.pw
@@ -104,7 +82,7 @@ Restart bind9 dengan command `service bind9 restart`.
 
 **HASIL :**
 
-***foto***
+![](img/hasil2.png)
 
 ### Soal No. 3
 (3) buat subdomain http://penanjakan.semeruyyy.pw yang diatur DNS-nya pada MALANG dan mengarah ke IP Server PROBOLINGGO
@@ -121,7 +99,7 @@ Restart bind9 dengan command `service bind9 restart`.
 
 **HASIL :**
 
-***foto***
+![](img/hasil3.png)
 
 ### Soal No. 4
 (4) buatkan reverse domain untuk domain utama.
@@ -196,7 +174,7 @@ Restart bind9 MOJOKERTO dengan command `service bind9 restart`.
 
 **HASIL :**
 
-***foto***
+![](img/hasil6.png)
 
 ### Soal No.7
 (7) buat subdomain dengan nama http://naik.gunung.semeruyyy.pw, domain ini diarahkan ke IP Server PROBOLINGGO.
@@ -209,7 +187,7 @@ Restart bind9 MOJOKERTO dengan command `service bind9 restart`.
 
 **HASIL :**
 
-***foto***
+![](img/hasil7.png)
 
 Setelah selesai membuat keseluruhan domain, kamu diminta untuk segera mengatur web server. 
 
@@ -220,16 +198,12 @@ Pertama-tama, pada UML PROBOLINGGO, install apache dengan command `apt-get insta
 
 Kemudian download file pendukung yang tertera pada file soal dengan command `wget 10.151.36.202/semeru.pw.zip` pada directory `/var/www/semeruc01.pw`. Kemudian unzip file dengan command `unzip semeru.pw.zip`.
 
-Kemudian edit file default yang terdapat di folder sites-available dengan command `nano /etc/apache2/sites-available/000-default.conf` sebagai berikut :
-
-***foto***
-
 Kemudian pindah ke folder `/etc/apache2/sites-available/` dan copy file `000-default.conf` ke file `semeruc01.pw.conf` dengan menggunakan command `cp 000-default.conf semeruc01.pw.conf`. Tambahkan konfigurasi berikut ke dalam file `semeruc01.pw.conf` :
 ```
 ServerName semeruc01.pw
 ServerAlias www.semeruc01.pw
 ```
-***foto***
+![](img/8d.png)
 
 Kemudian aktifkan konfigurasi yang telah dibuat dengan command `a2ensite semeruc02.pw`.
 
@@ -237,7 +211,7 @@ Restart apache dengan command `service apache2 restart`.
 
 **HASIL :**
 
-***foto***
+![](img/hasil8.png)
 
 ### Soal No.9
 (9) aktifkan mod rewrite agar urlnya menjadi http://semeruyyy.pw/home.
@@ -257,7 +231,7 @@ Restart apache dengan command `service apache2 restart`.
 
 **HASIL :**
 
-***foto***
+![](img/hasil9.png)
 
 ### Soal No.10
 (10) Web http://penanjakan.semeruyyy.pw akan digunakan untuk menyimpan assets file yang memiliki DocumentRoot pada /var/www/penanjakan.semeruyyy.pw dan memiliki struktur
@@ -283,7 +257,7 @@ ServerAlias www.penanjakan.semeruc01.pw
 ```
 Kemudian ubah folder document root menjadi `/var/www/penanjakan.semeruc01.pw`.
 
-***foto***
+![](img/10d.png)
 
 Kemudian aktifkan konfigurasi yang telah dibuat dengan command `a2ensite penanjakan.semeruc02.pw`.
 
@@ -291,7 +265,7 @@ Restart apache dengan command `service apache2 restart`.
 
 **HASIL :**
 
-***foto***
+![](img/hasil10.png)
 
 ### Soal No.11
 (11) Pada folder `/public` dibolehkan directory listing namun untuk folder yang berada di dalamnya tidak dibolehkan.
@@ -305,13 +279,17 @@ Pada UML PROBOLINGGO, buka file `/etc/apache2/sites-available/penanjakan.semeruc
      Options -Indexes
  </DirectoryMatch>
 ```
-***foto***
+![](img/11d.png)
 
 Restart apache dengan command `service apache2 restart`.
 
 **HASIL :**
 
-***foto***
+![](img/hasil11a.png)
+
+![](img/hasil11b.png)
+
+![](img/hasil11c.png)
 
 ### Soal No.12
 (12) Untuk mengatasi HTTP Error code 404, disediakan file `404.html` pada folder `/errors` untuk mengganti error default 404 dari Apache.
@@ -341,7 +319,7 @@ Restart apache dengan command `service apache2 restart`.
 
 **HASIL :**
 
-***foto***
+![](img/hasil13.png)
 
 ### Soal No.14
 (14) Untuk web http:// gunung.semeruyyy.pw belum dapat dikonfigurasi pada web server karena menunggu pengerjaan website selesai. sedangkan web http:// naik.gunung.semeruyyy.pw sudah bisa diakses hanya dengan menggunakan port 8888.
@@ -360,11 +338,11 @@ ServerAlias www.naik.gunung.semeruc01.pw
 ```
 Kemudian ubah folder document root menjadi `/var/www/naik.gunung.semeruc01.pw` dan virtual host menjadi 8888.
 
-***foto***
+![](img/14d.png)
 
 Kemudian pada file `/etc/apache2/ports.conf`, tambahkan `Listen 8888`.
 
-***foto***
+![](img/14e.png)
 
 Kemudian aktifkan konfigurasi yang telah dibuat dengan command `a2ensite naik.gunung.semeruc02.pw`.
 

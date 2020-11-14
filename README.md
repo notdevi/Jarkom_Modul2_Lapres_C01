@@ -87,10 +87,6 @@ Kemudian buat folder jarkom dalam folder `etc/bind` dengan menggunakan command `
 ```
 cp /etc/bind/db.local /etc/bind/jarkom/semeruc01.pw
 ```
-Kemudian ubah konfigurasi pada file semeruc01.pw dengan menambahkan IP PROBOLINGGO sebagai berikut :
-
-![](img/no1.png)
-
 Restart bind9 dengan command `service bind9 restart`.
 
 **HASIL :**

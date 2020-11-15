@@ -137,7 +137,7 @@ Pada UML MALANG edit file `/etc/bind/named.conf.options` pada UML MALANG dan tam
 
 ![](img/no6.png)
 
-Pada UML MOJOKERTO, edit file `/etc/bind/named.conf.local` dengan menambahkan `allow-query {any;}`.
+Pada UML MOJOKERTO, edit file `/etc/bind/named.conf.local` dengan menambahkan konfigurasi berikut :
 
 ![](img/no6b.png)
 

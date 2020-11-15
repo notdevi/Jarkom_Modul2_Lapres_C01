@@ -110,7 +110,7 @@ Restart bind9 dengan command `service bind9 restart`.
 
 **HASIL :**
 
-***foto***
+![](img/hasil4.png)
 
 ### Soal No. 5
 (5) buatkan DNS Server Slave pada MOJOKERTO agar Bibah tidak terganggu menikmati keindahan Semeru pada Website.
@@ -128,7 +128,7 @@ Restart bind9 MOJOKERTO dengan command `service bind9 restart`.
 
 **HASIL :**
 
-***foto***
+![](img/hasil5.png)
 
 ### Soal No.6 
 (6) buatkan subdomain dengan alamat http://gunung.semeruyyy.pw yang didelegasikan pada server MOJOKERTO dan mengarah ke IP Server PROBOLINGGO.
